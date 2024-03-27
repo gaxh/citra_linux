@@ -1,0 +1,25 @@
+1. add apt repository for clang14 and qt6
+    add-apt-repository "ppa:ubuntu-toolchain-r/test" -y
+    add-apt-repository "ppa:okirby/qt6-backports" -y
+    add-apt-repository "ppa:okirby/qt6-backports" -y
+
+2. install toolchain
+    curl https://apt.llvm.org/llvm.sh | sudo bash -s "14"
+    apt install -y libstdc++-11-dev libstdc++6 libclang-14-dev gcc-11 g++-11 clang-14 llvm-14
+
+3. install dependencies
+    apt-get install git libsdl2-2.0-0 libsdl2-dev qt6-base-dev qt6-base-private-dev libqt6opengl6-dev qt6-multimedia-dev libqt6multimedia6 qt6-l10n-tools libfdk-aac-dev build-essential cmake libc++-dev libswscale-dev libavdevice* libavformat-dev libavcodec-dev libssl-dev
+
+4. download citra source code
+    git clone https://github.com/gaxh/citra.git
+    cd citra
+    git submodule update --init --recursive
+
+5. download and install cmake high version
+    https://cmake.org/download/
+
+6. compile citra
+    cd citra
+    mkdir -p build && cd build
+    cmake .. -DCMAKE_BUILD_TYPE=Release -DCITRA_ENABLE_BUNDLE_TARGET=OFF -DCMAKE_CXX_FLAGS=-mcpu=native -DCMAKE_C_FLAGS=-mcpu=native -DCMAKE_C_COMPILER=clang-14 -DCMAKE_CXX_COMPILER=clang++-14
+    make -j4
