@@ -1,7 +1,7 @@
 1. add apt repository for clang14 and qt6
     add-apt-repository "ppa:ubuntu-toolchain-r/test" -y
     add-apt-repository "ppa:okirby/qt6-backports" -y
-    add-apt-repository "ppa:okirby/qt6-backports" -y
+    add-apt-repository "ppa:okirby/qt6-testing" -y
 
 2. install toolchain
     curl https://apt.llvm.org/llvm.sh | sudo bash -s "14"
