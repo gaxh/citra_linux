@@ -4,8 +4,12 @@
     add-apt-repository "ppa:okirby/qt6-testing" -y
 
 2. install toolchain
+    # clang
     curl https://apt.llvm.org/llvm.sh | sudo bash -s "14"
     apt install -y libstdc++-11-dev libstdc++6 libclang-14-dev gcc-11 g++-11 clang-14 llvm-14
+
+    # gcc
+    apt install -y libstdc++-11-dev libstdc++6 gcc-11 g++-11
 
 3. install dependencies
     apt-get install git libsdl2-2.0-0 libsdl2-dev qt6-base-dev qt6-base-private-dev libqt6opengl6-dev qt6-multimedia-dev libqt6multimedia6 qt6-l10n-tools libfdk-aac-dev build-essential cmake libc++-dev libswscale-dev libavdevice* libavformat-dev libavcodec-dev libssl-dev
@@ -21,5 +25,11 @@
 6. compile citra
     cd citra
     mkdir -p build && cd build
+
+    # clang
     cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCITRA_ENABLE_BUNDLE_TARGET=OFF -DCMAKE_CXX_FLAGS=-mcpu=native -DCMAKE_C_FLAGS=-mcpu=native -DCMAKE_C_COMPILER=clang-14 -DCMAKE_CXX_COMPILER=clang++-14
+
+    # gcc
+    cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCITRA_ENABLE_BUNDLE_TARGET=OFF -DCMAKE_CXX_FLAGS=-mcpu=native -DCMAKE_C_FLAGS=-mcpu=native -DCMAKE_C_COMPILER=gcc-11 -DCMAKE_CXX_COMPILER=g++-11
+
     make -j4
